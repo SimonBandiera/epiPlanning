@@ -1,10 +1,11 @@
 import requests
 
 
-def get_planning(url, date_start, date_end):
-    s = requests.Session()
-    s.get(url)
-    r = s.get(f'https://intra.epitech.eu/planning/load?format=json&start={date_start}&end={date_end}')
+def get_planning(cookie, date_start, date_end):
+    COOKIES = {
+        "user" : cookie,
+    }
+    r = requests.get(f'https://intra.epitech.eu/planning/load?format=json&start={date_start}&end={date_end}', cookies=COOKIES)
     list_calendar = []
     for i in r.json():
         if i["event_registered"]:
@@ -13,5 +14,6 @@ def get_planning(url, date_start, date_end):
 
     return list_calendar
 if __name__ == "__main__":
-    planner = get_planning('https://intra.epitech.eu/auth-49a1479057f247d75ac3d0d251d9d03de2e1172a', '2021-11-08',
+    planner = get_planning('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbiI6InNpbW9uLmJhbmRpZXJhQGVwaXRlY2guZXUiLCJ0eiI6bnVsbCwiZXhwIjoxNjg0ODUwMDY2fQ.PO2LB7aQyUGqs4Atrm4cSF4n0GDsMAujd2d-pBkB1i8', '2021-11-08',
                            '2021-11-14')
+    print(planner)
