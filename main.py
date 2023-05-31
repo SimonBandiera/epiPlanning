@@ -1,5 +1,5 @@
 import datetime
-from google import Create_Service
+from Google import Create_Service
 from google_calendar import create_calendar, get_calendar_list
 import apiEpitech
 import time
@@ -32,5 +32,7 @@ while True:
         week = [d.isoformat() for d in get_week(datetime.datetime.now().date())]
         data = apiEpitech.get_planning(user[1], week[0], week[6])
         create_calendar(get_calendar_list(service), service, data)
+    print("query terminée " + str(datetime.date.today()))
+        
     time.sleep(3600)
 
