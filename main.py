@@ -1,7 +1,7 @@
 import datetime
-from Google import Create_Service
+from google import Create_Service
 from google_calendar import create_calendar, get_calendar_list
-import api_epitech
+import apiEpitech
 import time
 
 one_day = datetime.timedelta(days=1)
@@ -30,7 +30,7 @@ while True:
         user = user.split(",")
         service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES, prefix=user[0])
         week = [d.isoformat() for d in get_week(datetime.datetime.now().date())]
-        data = api_epitech.get_planning(user[1], week[0], week[6])
+        data = apiEpitech.get_planning(user[1], week[0], week[6])
         create_calendar(get_calendar_list(service), service, data)
     time.sleep(3600)
 
