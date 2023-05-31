@@ -22,17 +22,13 @@ def get_week(date):
 
 
 print("lancement de la query " + str(datetime.date.today()))
-while True:
-    last = datetime.date.today()
-    with open("all_user.txt", "r") as f:
-        data = f.read()
-    for user in data.split(";"):
-        user = user.split(",")
-        service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES, prefix=user[0])
-        week = [d.isoformat() for d in get_week(datetime.datetime.now().date())]
-        data = apiEpitech.get_planning(user[1], week[0], week[6])
-        create_calendar(get_calendar_list(service), service, data)
-    print("query terminée " + str(datetime.date.today()))
-        
-    time.sleep(3600)
-
+last = datetime.date.today()
+with open("all_user.txt", "r") as f:
+    data = f.read()
+for user in data.split(";"):
+    user = user.split(",")
+    service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES, prefix=user[0])
+    week = [d.isoformat() for d in get_week(datetime.datetime.now().date())]
+    data = apiEpitech.get_planning(user[1], week[0], week[6])
+    create_calendar(get_calendar_list(service), service, data)
+print("query terminée " + str(datetime.date.today()))
