@@ -1,2 +1,5 @@
 code_secret.json
 env
+token files
+__pycache__
+all_user.txt
